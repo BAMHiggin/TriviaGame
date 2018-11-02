@@ -1,0 +1,33 @@
+body {
+    background-image: url("../images/AD_DesktopSmaller.jpg");
+}
+
+#title {
+    font-size: 70px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.container {
+    background-color: #f1671f;
+    /* display: flex; */
+    text-align: center;
+    justify-content: center;
+    margin: 7% 15% 10% 15%;
+    height: 550px;
+    color: beige;
+    font-family: 'Pangolin', cursive;
+}
+
+#startButton {
+    background-color:beige;
+    align-content: center;
+    font-family: 'Pangolin', cursive;
+    font-size: 70px;
+    color: black;
+    margin: 80px;
+    height: 200px;
+    width: 300px;
+    border-style: hidden;
+}
+ 
