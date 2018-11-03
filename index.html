@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Pangolin" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
 
 </head>
@@ -16,16 +17,20 @@
     <div class="container">
         <div id="title"> Arrested Development Trivia </div>
         <!-- Start button lives here -->
-        <!-- <div><button id="startButton"> Start </button></div> -->
+        <div><button id="startButton"> Start </button></div>
         
         <!-- questions and answers hang out here -->
-        <p id="timer">test timer space: </p>
-        <p id="question"> test question space</p>
+        <p id="timer">test timer space: <span id="display"></span> </p>
+        <p id="quizQuestion"></p>
+        <!-- right, wrong, or times out text -->
+        <p id="gameStatus"></p>
+        <p id="correctAnswerOutput"></p>
+        <p id="gif"></p>
         <div class="questionButtons">
-            <button id="btn0"><span id="option0"></span></button>
-            <button id="btn1"><span id="option1"></span></button>
-            <button id="btn2"><span id="option2"></span></button>
-            <button id="btn3"><span id="option3"></span></button>
+            <button id="btnA"><span id="optionA"></span></button>
+            <button id="btnB"><span id="optionB"></span></button>
+            <button id="btnC"><span id="optionC"></span></button>
+            <button id="btnD"><span id="optionD"></span></button>
         </div>
 
 
@@ -39,7 +44,7 @@
 
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    
     <script src="./assets/javascript/app.js"></script>
 </body>
 
