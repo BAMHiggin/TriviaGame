@@ -41,6 +41,7 @@
     border-style: dashed;
     border-width: 10px;
     border-radius: 10%;
+    /* I know this looks excessive but it's for my cool bumblebee hive-lookin' start button. BEES?! */
     background:
 radial-gradient(circle farthest-side at 0% 50%,#fb1 23.5%,rgba(240,166,17,0) 0)21px 30px,
 radial-gradient(circle farthest-side at 0% 50%,#B71 24%,rgba(240,166,17,0) 0)19px 30px,
@@ -52,7 +53,6 @@ background-size: 40px 60px;
 }
 
 /* Once game begins, these questions/answers/explanation texts will appear */
-
 
 p {
     font-size: 30px;
@@ -92,12 +92,6 @@ p {
 
 }
 
-#finalCorrectScore,
-#finalIncorrectScore,
-#finalTimeoutScore {
-    text-align: center;
-}
-
 #restartText {
     color: black;
     background-color: beige;
@@ -108,7 +102,6 @@ p {
     border-width: 10px;
     border-radius: 5%;
 border-color: beige;
-
 
 }
 
