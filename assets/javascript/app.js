@@ -1,5 +1,6 @@
 // Title page start button click
-questionReset()  
+$(".finalScreen").hide();
+questionReset()
 $("#timer").hide();         // hides until start button is clicked
 
 //global variables
@@ -7,24 +8,84 @@ var correctScore = 0;
 var incorrectScore = 0;
 var timeoutScore = 0;
 var userGuess = '';
-var countdownTimer = 10;
+var i = 0;
 var questionTimeout;
 
-$('#startButton').on('click', function () {
-    $(this).parent().hide();
+//configuration
+var countdownTimer = 60;
+var gifTimer = 3;
+
+//reset stuff
+function questionReset() {
+    $(".questionButtons").hide();
+    $("#quizQuestion").hide();
+}
+
+//buttons, buttons, buttons
+$("#startButton").on('click', function() {
+    newGame("#startButton");
+});
+
+$("#restartImg").on('click', function() {
+    newGame("#restartImg");
+})
+
+$("#btnA").on('click', function () {
+    if ($(this).text() === myQuestions[i].correctAnswer) {
+        winLogic();
+        //reset (timer), questions
+    } else if ($(this).text() != myQuestions[i].correctAnswer) {
+        loseLogic();
+        //needs other resets
+    }
+});
+$("#btnB").on('click', function () {
+    if ($(this).text() === myQuestions[i].correctAnswer) {
+        winLogic();
+        //reset (timer), questions
+    } else if ($(this).text() != myQuestions[i].correctAnswer) {
+        loseLogic();
+        //needs other resets
+    }
+});
+$("#btnC").on('click', function () {
+    if ($(this).text() === myQuestions[i].correctAnswer) {
+        winLogic();
+        //reset (timer), questions
+    } else if ($(this).text() != myQuestions[i].correctAnswer) {
+        loseLogic();
+        //needs other resets
+    }
+});
+$("#btnD").on('click', function () {
+    if ($(this).text() === myQuestions[i].correctAnswer) {
+        winLogic();
+        //reset (timer), questions
+    } else if ($(this).text() != myQuestions[i].correctAnswer) {
+        loseLogic();
+        //needs other resets
+    }
+});
+
+
+
+function newGame(idName) {
+    i = 0;
+    $(idName).parent().hide();
     $(".questionButtons").show();
     stopwatch.start();
     questionTimeout = setTimeout(timeoutLogic, countdownTimer * 1000); //placed so the display timer is in sync with stopwatch, set to 30000 milliseconds
-    $("#timer").show();    
+    $("#timer").show();
     $("#quizQuestion").show();
     $("#quizQuestion").text(myQuestions[i].question);
     $('#btnA').text(myQuestions[i].answers.a);
     $('#btnB').text(myQuestions[i].answers.b);
     $('#btnC').text(myQuestions[i].answers.c);
     $('#btnD').text(myQuestions[i].answers.d);
-    
+}
 
-});
+
+
 // create timer that begins countdown once start button is clicked
 var intervalId;
 
@@ -108,19 +169,17 @@ var stopwatch = {
 }
 
 
-
-
 // questions and answers
 var myQuestions = [
     {
-        question: "Which answer is red?",
+        question: "Who is the narrator of the show?",
         answers: {
-            a: 'yellow',
-            b: 'blue',
-            c: 'red',
-            d: 'green'
+            a: 'Ron Howard',
+            b: 'Rob Reiner',
+            c: 'Carl Weathers',
+            d: 'Jason Alexander'
         },
-        correctAnswer: 'red',
+        correctAnswer: 'Ron Howard',
         correctAnswerGif: 'assets/images/correct0.gif',
         incorrectAnswerGif: 'assets/images/incorrect0.gif'
     },
@@ -137,69 +196,67 @@ var myQuestions = [
         incorrectAnswerGif: 'assets/images/incorrect1.gif'
     },
     {
-        question: "dummyquestion",
+        question: "Which of the following words would Tobias not use to describe himself?",
         answers: {
-            a: 'Franklin',
-            b: 'Judge Reinhold',
-            c: 'Buster',
-            d: 'Amy'
+            a: 'Actor',
+            b: 'Black',
+            c: 'Big',
+            d: 'Therapist'
         },
-        correctAnswer: 'Amy',
+        correctAnswer: 'Big',
         correctAnswerGif: 'assets/images/correct2.gif',
         incorrectAnswerGif: 'assets/images/incorrect2.gif'
     },
     {
-        question: "dummyquestion",
+        question: "What is Buster's real name?",
         answers: {
-            a: 'Franklin',
-            b: 'Judge Reinhold',
-            c: 'Buster',
-            d: 'Amy'
+            a: 'George',
+            b: 'Byron',
+            c: 'Butch',
+            d: 'Buddy'
         },
-        correctAnswer: 'Amy',
+        correctAnswer: 'Byron',
         correctAnswerGif: 'assets/images/correct3.gif',
         incorrectAnswerGif: 'assets/images/incorrect3.gif'
     },
     {
-        question: "dummyquestion",
+        question: "Which is not a nickname for Anne?",
         answers: {
-            a: 'Franklin',
-            b: 'Judge Reinhold',
-            c: 'Buster',
-            d: 'Amy'
+            a: 'Egg',
+            b: 'Bland',
+            c: 'Plant',
+            d: 'Fran'
         },
-        correctAnswer: 'Amy',
+        correctAnswer: 'Fran',
         correctAnswerGif: 'assets/images/correct4.gif',
         incorrectAnswerGif: 'assets/images/incorrect4.gif'
     },
     {
-        question: "dummyquestion",
+        question: "Which is not a charity that Lindsay supports?",
         answers: {
-            a: 'Franklin',
-            b: 'Judge Reinhold',
-            c: 'Buster',
-            d: 'Amy'
+            a: 'TBD',
+            b: 'Save Our Bluths',
+            c: 'Hands Off Our Penises',
+            d: 'Clean Up The Wetlands'
         },
-        correctAnswer: 'Amy',
+        correctAnswer: 'Save Our Bluths',
         correctAnswerGif: 'assets/images/correct5.gif',
         incorrectAnswerGif: 'assets/images/incorrect5.gif'
     },
     {
-        question: "dummyquestion",
+        question: "What is the name of Maeby's alter ego?",
         answers: {
-            a: 'Franklin',
-            b: 'Judge Reinhold',
-            c: 'Buster',
-            d: 'Amy'
+            a: 'Nelly',
+            b: 'Babey',
+            c: 'Kitty',
+            d: 'Shirley'
         },
-        correctAnswer: 'Amy',
+        correctAnswer: 'Shirley',
         correctAnswerGif: 'assets/images/correct6.gif',
         incorrectAnswerGif: 'assets/images/incorrect6.gif'
     }
 ];
 
-var i = 1;
-//var t = setTimeout(timeoutLogic, 30000);
 
 //display question
 function displayQuestion() {
@@ -221,74 +278,39 @@ function displayGIF(gifPath, gameStatus, correctAnswerOutput) {
     $("#gif").html('<img src="' + gifPath + '" />');
     $("#gameStatus").html(gameStatus);
 
-    var correctAnswerOutput = myQuestions[i].correctAnswer;
-    $("#correctAnswerOutput").text("The correct answer is  " + correctAnswerOutput);
+    if (correctAnswerOutput != "") {       // this ifstatement removes "the correct answer is" from win logic
+
+        $("#correctAnswerOutput").text(correctAnswerOutput);
+    } else {
+        $("#correctAnswerOutput").hide();
+    }
 
     $(".questionButtons").hide();
     $("#quizQuestion").hide();
     clearTimeout(questionTimeout);
-   //fiveT= setTimeout(nextQuestion, 5000); 
-   setTimeout(nextQuestion, 5000);   
+    //fiveT= setTimeout(nextQuestion, 5000); 
+    setTimeout(nextQuestion, gifTimer * 1000);
 
 };
 
-//button click events
-$("#btnA").on('click', function () {
-    if ($(this).text() === myQuestions[i].correctAnswer) {
-        winLogic();
-        //reset (timer), questions
-    } else if ($(this).text() != myQuestions[i].correctAnswer) {
-        loseLogic();
-        //needs other resets
-    } 
-});
-$("#btnB").on('click', function () {
-    if ($(this).text() === myQuestions[i].correctAnswer) {
-        winLogic();
-        //reset (timer), questions
-    } else if ($(this).text() != myQuestions[i].correctAnswer) {
-        loseLogic();
-        //needs other resets
-    } 
-});
-$("#btnC").on('click', function () {
-    if ($(this).text() === myQuestions[i].correctAnswer) {
-        winLogic();
-        //reset (timer), questions
-    } else if ($(this).text() != myQuestions[i].correctAnswer) {
-        loseLogic();
-        //needs other resets
-    } 
-});
-$("#btnD").on('click', function () {
-    if ($(this).text() === myQuestions[i].correctAnswer) {
-        winLogic();
-        //reset (timer), questions
-    } else if ($(this).text() != myQuestions[i].correctAnswer) {
-        loseLogic();
-        //needs other resets
-    } 
-});
-
-
+///////////////// LOGICZ ///////////////////////
 
 //logic for correct answer
 function winLogic() {
     $(".questionButtons").hide();
     stopwatch.stop();
     correctScore++;
-    
-    displayGIF(myQuestions[i].correctAnswerGif, "Correct!", null);  
-   
+
+    displayGIF(myQuestions[i].correctAnswerGif, "Correct!", "");
+
 };
 // incorrect answer logic
 function loseLogic() {
     $(".questionButtons").hide();
     stopwatch.stop();
     incorrectScore++;
+    var correctAnswerOutput = myQuestions[i].correctAnswer;
     displayGIF(myQuestions[i].incorrectAnswerGif, "Wrong!", "The correct answer is: " + correctAnswerOutput);
-    
-
 
 };
 //time ran out
@@ -296,41 +318,57 @@ function timeoutLogic() {
     $(".questionButtons").hide();
     stopwatch.stop();
     timeoutScore++;
-    displayGIF(myQuestions[i].incorrectAnswerGif, "Times Up!", "The correct answer is: " + correctAnswerOutput);    
+    var correctAnswerOutput = myQuestions[i].correctAnswer;
+    displayGIF(myQuestions[i].incorrectAnswerGif, "Times Up!", "The correct answer is: " + correctAnswerOutput);
 
-    
+
 };
-
-//put reset here
-function questionReset() {
-    $(".questionButtons").hide();
-    $("#quizQuestion").hide();
-}
 
 function nextQuestion() {
     i++;
-    $("#gif").hide();
-    $("#gameStatus").hide();
-    $("#correctAnswerOutput").hide();
-    $(".questionButtons").show();
-    $("#quizQuestion").show();
-    //timer.reset();
-    stopwatch.reset();
-    stopwatch.start();
-    
-    questionTimeout = setTimeout(timeoutLogic, countdownTimer * 1000); //so display timer starts with stopwatch
-    $("#timer").show();
+    if (i < myQuestions.length) {
+        $("#gif").hide();
+        $("#gameStatus").hide();
+        $("#correctAnswerOutput").hide();
+        $(".questionButtons").show();
+        $("#quizQuestion").show();
+        //timer.reset();
+        stopwatch.reset();
+        stopwatch.start();
+
+        questionTimeout = setTimeout(timeoutLogic, countdownTimer * 1000); //so display timer starts with stopwatch
+        $("#timer").show();
 
 
-    $("#quizQuestion").text(myQuestions[i].question);
-    $('#btnA').text(myQuestions[i].answers.a);
-    $('#btnB').text(myQuestions[i].answers.b);
-    $('#btnC').text(myQuestions[i].answers.c);
-    $('#btnD').text(myQuestions[i].answers.d);
+        $("#quizQuestion").text(myQuestions[i].question);
+        $('#btnA').text(myQuestions[i].answers.a);
+        $('#btnB').text(myQuestions[i].answers.b);
+        $('#btnC').text(myQuestions[i].answers.c);
+        $('#btnD').text(myQuestions[i].answers.d);
+    } else {
+        //game over logic
+        questionReset();
+        finalScreen();
+
+    }
+
+    //final screen stuff
+    function finalScreen() {
+        $("#gif").hide();
+        $("#gameStatus").hide();
+        $("#correctAnswerOutput").hide();
+        $(".finalScreen").show();
+        $("#finalCorrectScore").text("Correct Answers: " + correctScore);
+        $("#finalIncorrectScore").text("Incorrect Answers: " + incorrectScore);
+        $("#finalTimeoutScore").text("Ran out of time: " + timeoutScore);
+    }
 
 };
+//// How I feel about timers
 
-// consider connecting timeout result to timer function
+////  ┬─┬﻿ ノ( ゜-゜ノ) 
+//// -------------------
+////  (ノ ゜Д゜)ノ ︵ ┻━┻ 
 
 
 

@@ -71,10 +71,45 @@ p {
     margin-top: 30px;
     border-style: none;
     border-radius: 10%; 
+    font-size: 30px;
+    text-justify: center;
+    font-family: 'Pangolin', cursive;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 65px; 
+    align-content: center;
 }
 
-#quizQuestion {
-    font-weight: bolder;
+
+
+/* final screen */
+#gameOverText {
+    font-size: 50px;
+    background-color: beige;
+    color: black;
+    padding: 10px;
+    font-weight: bold;
+
+}
+
+#finalCorrectScore,
+#finalIncorrectScore,
+#finalTimeoutScore {
+    text-align: center;
+}
+
+#restartText {
+    color: black;
+    background-color: beige;
+}
+
+#restartImg {
+    border-style: dashed;
+    border-width: 10px;
+    border-radius: 5%;
+border-color: beige;
+
+
 }
 
 
