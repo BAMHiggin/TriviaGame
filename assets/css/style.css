@@ -73,5 +73,9 @@ p {
     border-radius: 10%; 
 }
 
+#quizQuestion {
+    font-weight: bolder;
+}
+
 
 

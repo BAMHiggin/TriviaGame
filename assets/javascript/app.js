@@ -1,19 +1,28 @@
 // Title page start button click
-$(".questionButtons").hide();
-$("#timer").hide();
-$("#quizQuestion").hide();             // hides choice button options until start button is clicked
+questionReset()  
+$("#timer").hide();         // hides until start button is clicked
 
+//global variables
+var correctScore = 0;
+var incorrectScore = 0;
+var timeoutScore = 0;
+var userGuess = '';
+var countdownTimer = 10;
+var questionTimeout;
 
 $('#startButton').on('click', function () {
     $(this).parent().hide();
     $(".questionButtons").show();
-    $("#timer").show();
+    stopwatch.start();
+    questionTimeout = setTimeout(timeoutLogic, countdownTimer * 1000); //placed so the display timer is in sync with stopwatch, set to 30000 milliseconds
+    $("#timer").show();    
     $("#quizQuestion").show();
     $("#quizQuestion").text(myQuestions[i].question);
     $('#btnA').text(myQuestions[i].answers.a);
     $('#btnB').text(myQuestions[i].answers.b);
     $('#btnC').text(myQuestions[i].answers.c);
     $('#btnD').text(myQuestions[i].answers.d);
+    
 
 });
 // create timer that begins countdown once start button is clicked
@@ -25,12 +34,12 @@ var clockRunning = false;
 // Our stopwatch object
 var stopwatch = {
 
-    time: 30,
+    time: countdownTimer,
     lap: 1,
 
     reset: function () {
 
-        stopwatch.time = 30;
+        stopwatch.time = countdownTimer;
         stopwatch.lap = 1;
 
         // DONE: Change the "display" div to "00:00."
@@ -68,7 +77,7 @@ var stopwatch = {
     count: function () {
 
         // DONE: increment time by 1, remember we cant use "this" here.
-        stopwatch.time--    ;
+        stopwatch.time--;
 
         // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
         //       and save the result in a variable.
@@ -98,15 +107,6 @@ var stopwatch = {
     }
 }
 
-stopwatch.start();
-
-
-//global variables
-var correctScore = 0;
-var incorrectScore = 0;
-var timeoutScore = 0;
-var countdownTimer = 30; // for whenever I get to making the timer
-var userGuess = '';
 
 
 
@@ -199,6 +199,7 @@ var myQuestions = [
 ];
 
 var i = 1;
+//var t = setTimeout(timeoutLogic, 30000);
 
 //display question
 function displayQuestion() {
@@ -211,12 +212,23 @@ function displayQuestion() {
 
 //display gif
 function displayGIF(gifPath, gameStatus, correctAnswerOutput) {
+    $("#gif").show();
+    $("#gameStatus").show();
+    $("#correctAnswerOutput").show();
 
+    stopwatch.stop();
+    $("#timer").hide();
     $("#gif").html('<img src="' + gifPath + '" />');
     $("#gameStatus").html(gameStatus);
 
-    var correctAnswerOutput = myQuestions.correctAnswer;
-    $("#correctAnswerOutput").text(correctAnswerOutput);
+    var correctAnswerOutput = myQuestions[i].correctAnswer;
+    $("#correctAnswerOutput").text("The correct answer is  " + correctAnswerOutput);
+
+    $(".questionButtons").hide();
+    $("#quizQuestion").hide();
+    clearTimeout(questionTimeout);
+   //fiveT= setTimeout(nextQuestion, 5000); 
+   setTimeout(nextQuestion, 5000);   
 
 };
 
@@ -228,10 +240,7 @@ $("#btnA").on('click', function () {
     } else if ($(this).text() != myQuestions[i].correctAnswer) {
         loseLogic();
         //needs other resets
-    } else {
-        timeoutLogic();
-        //needs resets
-    }
+    } 
 });
 $("#btnB").on('click', function () {
     if ($(this).text() === myQuestions[i].correctAnswer) {
@@ -240,10 +249,7 @@ $("#btnB").on('click', function () {
     } else if ($(this).text() != myQuestions[i].correctAnswer) {
         loseLogic();
         //needs other resets
-    } else {
-        timeoutLogic();
-        //needs resets
-    }
+    } 
 });
 $("#btnC").on('click', function () {
     if ($(this).text() === myQuestions[i].correctAnswer) {
@@ -252,10 +258,7 @@ $("#btnC").on('click', function () {
     } else if ($(this).text() != myQuestions[i].correctAnswer) {
         loseLogic();
         //needs other resets
-    } else {
-        timeoutLogic();
-        //needs resets
-    }
+    } 
 });
 $("#btnD").on('click', function () {
     if ($(this).text() === myQuestions[i].correctAnswer) {
@@ -264,39 +267,68 @@ $("#btnD").on('click', function () {
     } else if ($(this).text() != myQuestions[i].correctAnswer) {
         loseLogic();
         //needs other resets
-    } else {
-        timeoutLogic();
-        //needs resets
-    }
+    } 
 });
 
 
 
 //logic for correct answer
 function winLogic() {
-    stopwatch.reset();
+    $(".questionButtons").hide();
+    stopwatch.stop();
     correctScore++;
-    displayGIF(myQuestions[i].correctAnswerGif, "Correct!", null);
-    i++;
+    
+    displayGIF(myQuestions[i].correctAnswerGif, "Correct!", null);  
+   
 };
 // incorrect answer logic
 function loseLogic() {
-    stopwatch.reset();
+    $(".questionButtons").hide();
+    stopwatch.stop();
     incorrectScore++;
     displayGIF(myQuestions[i].incorrectAnswerGif, "Wrong!", "The correct answer is: " + correctAnswerOutput);
-    i++;
+    
+
+
 };
 //time ran out
-var t = setTimeout(timeoutLogic,30000);
 function timeoutLogic() {
-    clearTimeout(t);
-    stopwatch.reset();
+    $(".questionButtons").hide();
+    stopwatch.stop();
     timeoutScore++;
-    displayGIF(myQuestions[i].incorrectAnswerGif, "Times Up!", "The correct answer is: " + correctAnswerOutput);
-    i++;
+    displayGIF(myQuestions[i].incorrectAnswerGif, "Times Up!", "The correct answer is: " + correctAnswerOutput);    
+
+    
 };
 
 //put reset here
+function questionReset() {
+    $(".questionButtons").hide();
+    $("#quizQuestion").hide();
+}
+
+function nextQuestion() {
+    i++;
+    $("#gif").hide();
+    $("#gameStatus").hide();
+    $("#correctAnswerOutput").hide();
+    $(".questionButtons").show();
+    $("#quizQuestion").show();
+    //timer.reset();
+    stopwatch.reset();
+    stopwatch.start();
+    
+    questionTimeout = setTimeout(timeoutLogic, countdownTimer * 1000); //so display timer starts with stopwatch
+    $("#timer").show();
+
+
+    $("#quizQuestion").text(myQuestions[i].question);
+    $('#btnA').text(myQuestions[i].answers.a);
+    $('#btnB').text(myQuestions[i].answers.b);
+    $('#btnC').text(myQuestions[i].answers.c);
+    $('#btnD').text(myQuestions[i].answers.d);
+
+};
 
 // consider connecting timeout result to timer function
 
